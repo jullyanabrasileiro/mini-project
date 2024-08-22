@@ -1,0 +1,16 @@
+<mat-toolbar class="bg-pink-500 text-white max-w-7xl mx-auto flex justify-between items-center p-4">
+    <div>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div>
+        <ul class="flex space-x-4">
+            <li><a routerLink="/home" class="hover:underline">Home</a></li>
+            <li><a routerLink="/tasks" class="hover:underline">Tasks</a></li>
+            <li><a routerLink="/about" class="hover:underline">About</a></li>
+            <li><a routerLink="/register" class="border-r-2 border-white pr-4 hover:underline">Register</a></li>
+            <li><a routerLink="/login" class="hover:underline">Login</a></li>
+        </ul>
+    </div>
+</mat-toolbar>
