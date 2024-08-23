@@ -13,29 +13,27 @@ import { MatProgressSpinnerModule } from
     '@angular/material/progress-spinner';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-// MatNativeDateModule,,,
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from
     '@angular/platform-browser/animations';
 
-
-
 @NgModule({
   imports: [
-    MatSidenavModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatListModule,
-    MatMenuModule,
-    MatTabsModule,
-    FormsModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatProgressSpinnerModule,
-    BrowserAnimationsModule,
-    DragDropModule,
+    MatSidenavModule,         
+    MatToolbarModule,        
+    MatIconModule,            
+    MatButtonModule,          
+    MatListModule,           
+    MatMenuModule,            
+    MatTabsModule,             
+    MatCardModule,            
+    MatFormFieldModule,        
+    MatInputModule,            
+    MatProgressSpinnerModule,  
+    DragDropModule,       
+    FormsModule,              
+    ReactiveFormsModule,      
+    BrowserAnimationsModule,   
   ],
   exports: [
     MatSidenavModule,
@@ -45,13 +43,14 @@ import { BrowserAnimationsModule } from
     MatListModule,
     MatMenuModule,
     MatTabsModule,
-    FormsModule,
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    BrowserAnimationsModule,
     DragDropModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ]
 })
 export class MaterialModule {}

@@ -8,61 +8,53 @@ import { LoginData } from '../login-data';
     templateUrl: './register.component.html',
     styleUrls: ['./register.component.css']
 })
-
 export class RegisterComponent implements OnInit {
-register() {
-throw new Error('Method not implemented.');
-}
-onSubmit() {
-throw new Error('Method not implemented.');
-}
-  submitted = false;
-  showSpinner = false;
-  showMessage = false;
-registrationForm: FormGroup<any>;
-}
+    submitted = false;
+    showSpinner = false;
+    showMessage = false;
 
-registrationForm = new FormGroup({
-  fullname: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4),
-  ]),
-  email: new FormControl('', [
-      Validators.required,
-      Validators.email
-  ]),
-  password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(5)
-  ]),
-})
+    registrationForm = new FormGroup({
+        fullname: new FormControl('', [
+            Validators.required,
+            Validators.minLength(4)
+        ]),
+        email: new FormControl('', [
+            Validators.required,
+            Validators.email
+        ]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.minLength(5)
+        ]),
+    });
 
-get fullname() { return this.registrationForm.get('fullname')!; }
-get email() { return this.registrationForm.get('email')!; }
-get password() { return this.registrationForm.get('password')!; }
-onSubmit(): void {
-    this.submitted = false;
-    if (this.registrationForm.invalid) return;
-    console.log(JSON.stringify(this.registrationForm.value, null, 2));
-}
-constructor(public authService: AuthService) {}
+    get fullname() { return this.registrationForm.get('fullname')!; }
+    get email() { return this.registrationForm.get('email')!; }
+    get password() { return this.registrationForm.get('password')!; }
 
-ngOnInit(): void {}
+    constructor(public authService: AuthService) { }
 
-register() {
-  this.showSpinner = true;
-  this.showMessage = false;
-  this.submitted = true;
-  if (this.registrationForm.invalid) return;
-  console.log(JSON.stringify(this.registrationForm.value, null, 2));
-  let email = this.registrationForm.value["email"];
-  let password = this.registrationForm.value["password"];
-  let data: LoginData = { email: email, password: password }
+    ngOnInit(): void { }
 
-  this.authService.SignUp(data.email, data.password);
-  .subscribe(answer => {
-      console.log(answer);
-      this.showSpinner = false;
-      this.showMessage = true;
-  });
+    onSubmit(): void {
+        this.submitted = true;
+        if (this.registrationForm.invalid) return;
+        console.log(JSON.stringify(this.registrationForm.value, null, 2));
+    }
+
+    register() {
+        this.showSpinner = true;
+        this.showMessage = false;
+        this.submitted = true;
+        if (this.registrationForm.invalid) return;
+        console.log(JSON.stringify(this.registrationForm.value, null, 2));
+        let email = this.registrationForm.value["email"];
+        let password = this.registrationForm.value["password"];
+        let data: LoginData = { email: email, password: password };
+        this.authService.SignUp(data.email, data.password).subscribe(answer => {
+            console.log(answer);
+            this.showSpinner = false;
+            this.showMessage = true;
+        });
+    }
 }

@@ -1,0 +1,48 @@
+.mat-toolbar {
+    display: flex; 
+    justify-content: space-between;
+    align-items: center; 
+    background-color: #ff05cd; 
+    color: white;
+}
+
+.mat-icon-button {
+    color: white;
+}
+
+.mat-toolbar .mat-icon {
+    color: white !important; 
+}
+
+.spacer {
+    flex-grow: 1; 
+}
+
+.navbar ul {
+    list-style: none; 
+    display: flex; 
+    gap: 20px; 
+    margin: 0; 
+    padding: 0; 
+}
+
+.navbar li {
+    display: inline;
+}
+
+.navbar a,
+.login-register a {
+    color: white; 
+    text-decoration: none; 
+    font-weight: normal; 
+}
+
+.navbar a:hover,
+.login-register a:hover {
+    text-decoration: underline;
+}
+
+.login-register {
+    display: flex;
+    gap: 15px; 
+}

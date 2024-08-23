@@ -1,15 +1,26 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-side-nav',
   templateUrl: './side-nav.component.html',
-  styleUrl: './side-nav.component.css'
+  styleUrls: ['./side-nav.component.css']
 })
-export class SideNavComponent {
-  @Output() sidenavClose = new EventEmitter();
+export class SideNavComponent implements OnInit {
+
+  @Input() sidenav!: MatSidenav;
+
+
+  @Output() sidenavClose = new EventEmitter<void>();
+
   constructor() {}
-  ngOnInit() {}
-  public onSidenavClose = () => {
-      this.sidenavClose.emit();
+
+
+  ngOnInit(): void {}
+
+
+  public onSidenavClose(): void {
+    this.sidenavClose.emit();
+    this.sidenav.close();
   }
 }
