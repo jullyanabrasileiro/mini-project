@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Task } from '../task/types';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskDialogComponent, TaskDialogResult } from '../task-dialog/task-dialog.component';
 
 @Component({
   selector: 'app-tasks',
@@ -10,52 +12,79 @@ import { Task } from '../task/types';
 })
 export class TasksComponent {
 
+  constructor(private dialog: MatDialog) {}
+
+  newTask(): void {
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '270px',
+      data: {
+        task: {},
+      },
+    });
+    dialogRef
+      .afterClosed()
+      .subscribe((result: TaskDialogResult|undefined) => {
+        if (!result) {
+          return;
+        }
+        this.todo.push(result.task);
+      });
+  }
+
   todo: Task[] = [
-    { title: 'Buy milk', description: 'Go to the store and buy milk', list: 'todo' },
-    { title: 'Drawing on canvas', description: 'Buy 3 canvas and pens!', list: 'todo' }
+    {
+      title: 'Buy milk',
+      description: 'Go to the store and buy milk'
+    },
+    {
+      title: 'Create a Kanban app',
+      description: 'Using Firebase and Angular create a Kanban app!'
+    }
   ];
+
   inProgress: Task[] = [];
   done: Task[] = [];
 
+  editTask(list: 'done' | 'todo' | 'inProgress', task: Task): void {
+    console.log(task)
+    const dialogRef = this.dialog.open(TaskDialogComponent, {
+      width: '270px',
+      data: {
+        task,
+        enableDelete: true,
+      },
+    });
+    dialogRef.afterClosed().subscribe((result: TaskDialogResult|undefined) => {
+      if (!result) {
+        return;
+      }
 
-  addTaskForm = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(5)]),
-    description: new FormControl('', [Validators.required, Validators.minLength(5)]),
-  });
 
-  
-  onSubmit(): void {
-    const newTask: Task = {
-      title: this.addTaskForm.get('title')?.value || '',  
-      description: this.addTaskForm.get('description')?.value || '',  
-      list: 'todo', 
-    };
-    this.todo.push(newTask);  
-    this.addTaskForm.reset();  
+
+
+      const dataList = this[list];
+      const taskIndex = dataList.indexOf(task);
+      if (result.delete) {
+        dataList.splice(taskIndex, 1);
+      } else {
+        dataList[taskIndex] = task;
+      }
+    });
   }
 
-
-  drop(event: CdkDragDrop<Task[]>): void {
-    if (event.previousContainer === event.container) return; 
+  drop(event: CdkDragDrop<Task[]|null|any>): void {
+    if (event.previousContainer === event.container) {
+      return;
+    }
+    if (!event.container.data || !event.previousContainer.data) {
+      return;
+    }
     transferArrayItem(
-      event.previousContainer.data,  
-      event.container.data, 
-      event.previousIndex,  
-      event.currentIndex 
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
     );
   }
-
-  deleteIt(list: string, task: Task): void {
-    let index;
-    if (list === 'todo') {
-      index = this.todo.indexOf(task); 
-      this.todo.splice(index, 1); 
-    } else if (list === 'inProgress') {
-      index = this.inProgress.indexOf(task);  
-      this.inProgress.splice(index, 1); 
-    } else if (list === 'done') {
-      index = this.done.indexOf(task);  
-      this.done.splice(index, 1); 
-    }
-  }
+  
 }

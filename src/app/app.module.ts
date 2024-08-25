@@ -17,6 +17,11 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { SideNavListComponent } from './components/side-nav-list/side-nav-list.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { RegisterComponent } from '../auth/register/register.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { TaskDialogComponent } from './components/task-dialog/task-dialog.component';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -28,7 +33,7 @@ import { RegisterComponent } from '../auth/register/register.component';
     TaskComponent,
     TasksComponent,
     LoginComponent, 
-    RegisterComponent
+    RegisterComponent, TaskDialogComponent
   ],
   imports: [
       BrowserModule,
@@ -36,6 +41,10 @@ import { RegisterComponent } from '../auth/register/register.component';
       MaterialModule,
       FormsModule,
       ReactiveFormsModule,
+      DragDropModule,
+      MatButtonModule,
+      MatDialogModule,
+      MatInputModule
   ],
   providers: [
     provideFirebaseApp(() => initializeApp({
