@@ -27,7 +27,8 @@
 }
 
 .navbar li {
-    display: inline;
+    display: flex;
+    justify-content: center;
 }
 
 .navbar a,
@@ -46,3 +47,38 @@
     display: flex;
     gap: 15px; 
 }
+
+ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+  
+ul li {
+    margin-right: 20px;
+  }
+  
+ul li a {
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+}
+  
+ul li a:hover {
+    text-decoration: underline;
+}
+  
+.auth-link {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+  
+.auth-link li {
+    margin-left: 20px;
+}
+  

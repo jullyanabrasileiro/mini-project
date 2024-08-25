@@ -5,12 +5,16 @@
         </button>
     </div>
     <div>
-        <ul class="flex space-x-4">
+        <ul class="flex">
             <li><a routerLink="/home">Home</a></li>
             <li><a routerLink="/tasks">Tasks</a></li>
             <li><a routerLink="/about">About</a></li>
-            <li><a routerLink="/register">Register</a></li>
-            <li><a routerLink="/login" class="hover:underline">Login</a></li>
+            
+            <div class="auth-link">
+                <li><a routerLink="/register">Register</a></li>
+                <li><a routerLink="/login" class="hover:underline">Login</a></li>
+            </div>
         </ul>
+        
     </div>
 </mat-toolbar>
