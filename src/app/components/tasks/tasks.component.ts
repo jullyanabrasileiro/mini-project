@@ -58,10 +58,6 @@ export class TasksComponent {
       if (!result) {
         return;
       }
-
-
-
-
       const dataList = this[list];
       const taskIndex = dataList.indexOf(task);
       if (result.delete) {
